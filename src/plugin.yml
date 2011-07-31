@@ -1,0 +1,12 @@
+name: MCStats3
+main: com.ubempire.MCStats3.StatsPlugin
+version: 3.0
+website: https://github.com/BananaCode/MCStats3
+author: Ryan Michela, codename_B
+description: >
+             Tracks player statistics and provides a web-based report.
+commands:
+  played:
+    description: Reports how long you have played for.
+    usage: |
+           /<command>
