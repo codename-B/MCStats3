@@ -67,11 +67,11 @@ public class StatsPlugin extends JavaPlugin {
 			File configFile = new File(getDataFolder(), "config.yml");			
 			if(!configFile.exists()) {
 				log.info("[MCStats] Populating initial config file");
-				OutputStreamWriter out = new OutputStreamWriter(
-											new FileOutputStream(
-												new File(getDataFolder(), "config.yml")));
+				FileOutputStream stream = new FileOutputStream(new File(getDataFolder(), "config.yml"));
+				OutputStreamWriter out = new OutputStreamWriter(stream);
 				out.write(StatsConfig.getInitialConfig());
 				out.close();
+				stream.close();
 			}
 			
 			// Initialize state
