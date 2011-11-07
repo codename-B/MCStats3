@@ -39,9 +39,12 @@ public class StatsModel {
 		if(new File(config.getStatsCacheFile()).exists())
 		{
 			try {
-				ObjectInputStream in = new ObjectInputStream(new FileInputStream(config.getStatsCacheFile()));
+				FileInputStream stream = new FileInputStream(config.getStatsCacheFile());
+				ObjectInputStream in = new ObjectInputStream(stream);
 				stats = (HashMap<String, PlayerStatistics>) in.readObject();
 				upgradeStats();
+				in.close();
+				stream.close();
 			} catch (Exception e) {
 				log.log(Level.SEVERE, "MCStats failed to restore player statistics.", e);
 				stats = new HashMap<String, PlayerStatistics>();
@@ -101,9 +104,11 @@ public class StatsModel {
 		}
 		
 		try {
-			ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(config.getStatsCacheFile()));
+			FileOutputStream stream = new FileOutputStream(config.getStatsCacheFile());
+			ObjectOutputStream out = new ObjectOutputStream(stream);
 			out.writeObject(stats);
 			out.close();
+			stream.close();
 		} catch (Exception ex) {
 			log.log(Level.SEVERE, "[MCStats] Failed to persist player statistics to disk.", ex);
 		}
